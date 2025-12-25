@@ -1,86 +1,88 @@
-# پیاده‌سازی الگوریتم‌های رمزنگاری کلاسیک
+# Classical Cryptography Algorithms Implementation
 
-## 📋 فهرست مطالب
-- [معرفی](#معرفی)
-- [الگوریتم‌های پیاده‌سازی شده](#الگوریتم‌های-پیاده‌سازی-شده)
-- [نصب و راه‌اندازی](#نصب-و-راه‌اندازی)
-- [نحوه استفاده](#نحوه-استفاده)
-- [ساختار پروژه](#ساختار-پروژه)
-- [تست](#تست)
-- [مثال‌ها](#مثال‌ها)
-- [مشارکت](#مشارکت)
-- [مجوز](#مجوز)
-
----
-
-## معرفی
-
-این پروژه شامل پیاده‌سازی سه الگوریتم رمزنگاری کلاسیک است که به عنوان پروژه درس جبرخطی عددی (Numerical Linear Algebra) انجام شده است. این پروژه شامل الگوریتم‌های Hill Cipher، DES و AES می‌باشد که هر کدام با استفاده از مفاهیم جبرخطی و رمزنگاری پیاده‌سازی شده‌اند.
+## 📋 Table of Contents
+- [Introduction](#introduction)
+- [Implemented Algorithms](#implemented-algorithms)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Examples](#examples)
+- [Implementation Features](#implementation-features)
+- [Limitations](#limitations)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## الگوریتم‌های پیاده‌سازی شده
+## Introduction
 
-### 1. Hill Cipher (رمزنگاری هیل)
-رمزنگاری هیل یک رمزنگاری چندحرفی (polygraphic substitution cipher) است که از جبرخطی و ضرب ماتریس استفاده می‌کند. این الگوریتم:
-- از ماتریس کلید برای رمزنگاری استفاده می‌کند
-- متن را به بلوک‌های n حرفی تقسیم می‌کند
-- هر بلوک را در ماتریس کلید ضرب می‌کند
-- از محاسبه معکوس ماتریس در مدول 26 برای رمزگشایی استفاده می‌کند
+This project implements three classical cryptography algorithms as part of a Numerical Linear Algebra course project. The project includes implementations of Hill Cipher, DES (Data Encryption Standard), and AES (Advanced Encryption Standard), each implemented using linear algebra and cryptography concepts.
+
+---
+
+## Implemented Algorithms
+
+### 1. Hill Cipher
+Hill Cipher is a polygraphic substitution cipher that uses linear algebra and matrix multiplication. This algorithm:
+- Uses a key matrix for encryption
+- Divides text into blocks of n characters
+- Multiplies each block by the key matrix
+- Uses matrix inverse calculation modulo 26 for decryption
 
 ### 2. DES (Data Encryption Standard)
-DES یک الگوریتم رمزنگاری بلوکی متقارن است که:
-- از کلید 64 بیتی استفاده می‌کند
-- متن را به بلوک‌های 64 بیتی تقسیم می‌کند
-- شامل 16 دور رمزنگاری است
-- از جداول جایگشت (permutation tables) و S-Boxes استفاده می‌کند
+DES is a symmetric block cipher algorithm that:
+- Uses a 64-bit key
+- Divides text into 64-bit blocks
+- Includes 16 rounds of encryption
+- Uses permutation tables and S-Boxes
 
 ### 3. AES (Advanced Encryption Standard)
-AES یک الگوریتم رمزنگاری بلوکی پیشرفته است که:
-- از کلید 128 بیتی استفاده می‌کند (AES-128)
-- متن را به بلوک‌های 128 بیتی (16 بایت) تقسیم می‌کند
-- شامل 10 دور رمزنگاری است
-- از تبدیل‌های SubBytes، ShiftRows، MixColumns و AddRoundKey استفاده می‌کند
-- از میدان محدود GF(2^8) برای عملیات ریاضی استفاده می‌کند
+AES is an advanced block cipher algorithm that:
+- Uses a 128-bit key (AES-128)
+- Divides text into 128-bit blocks (16 bytes)
+- Includes 10 rounds of encryption
+- Uses SubBytes, ShiftRows, MixColumns, and AddRoundKey transformations
+- Uses the finite field GF(2^8) for mathematical operations
 
 ---
 
-## نصب و راه‌اندازی
+## Installation
 
-### پیش‌نیازها
-- Python 3.6 یا بالاتر
+### Prerequisites
+- Python 3.6 or higher
 
-### نصب
+### Setup
 ```bash
-# کلون کردن مخزن
+# Clone the repository
 git clone https://github.com/yourusername/cryptography-ciphers.git
 
-# رفتن به پوشه پروژه
+# Navigate to project directory
 cd cryptography-ciphers
 ```
 
-نیازی به نصب کتابخانه اضافی نیست! این پروژه فقط از کتابخانه‌های استاندارد Python استفاده می‌کند.
+No additional libraries are required! This project uses only Python standard library.
 
 ---
 
-## نحوه استفاده
+## Usage
 
 ### Hill Cipher
 
 ```python
 from hill_cipher import encrypt_hill, decrypt_hill
 
-# تعریف ماتریس کلید (2x2)
+# Define key matrix (2x2)
 key_matrix = [[3, 3], [2, 5]]
 
-# متن اصلی
+# Plaintext
 plaintext = "HELLO WORLD"
 
-# رمزنگاری
+# Encryption
 ciphertext = encrypt_hill(plaintext, key_matrix)
 print(f"Ciphertext: {ciphertext}")
 
-# رمزگشایی
+# Decryption
 decrypted = decrypt_hill(ciphertext, key_matrix)
 print(f"Decrypted: {decrypted}")
 ```
@@ -90,17 +92,17 @@ print(f"Decrypted: {decrypted}")
 ```python
 from des_cipher import encrypt_des, decrypt_des
 
-# کلید (8 کاراکتر)
+# Key (8 characters)
 key = "SECRETKY"
 
-# متن اصلی
+# Plaintext
 plaintext = "HELLO WORLD"
 
-# رمزنگاری
+# Encryption
 ciphertext = encrypt_des(plaintext, key)
 print(f"Ciphertext: {ciphertext}")
 
-# رمزگشایی
+# Decryption
 decrypted = decrypt_des(ciphertext, key)
 print(f"Decrypted: {decrypted}")
 ```
@@ -110,69 +112,69 @@ print(f"Decrypted: {decrypted}")
 ```python
 from aes_cipher import encrypt_aes, decrypt_aes
 
-# کلید (16 کاراکتر)
+# Key (16 characters)
 key = "SECRETKEY123456"
 
-# متن اصلی
+# Plaintext
 plaintext = "HELLO WORLD"
 
-# رمزنگاری
+# Encryption
 ciphertext = encrypt_aes(plaintext, key)
 print(f"Ciphertext: {ciphertext}")
 
-# رمزگشایی
+# Decryption
 decrypted = decrypt_aes(ciphertext, key)
 print(f"Decrypted: {decrypted}")
 ```
 
 ---
 
-## ساختار پروژه
+## Project Structure
 
 ```
 project/
 │
-├── hill_cipher.py      # پیاده‌سازی رمزنگاری Hill
-├── des_cipher.py       # پیاده‌سازی رمزنگاری DES
-├── aes_cipher.py       # پیاده‌سازی رمزنگاری AES
-├── test.py            # فایل تست جامع برای همه الگوریتم‌ها
-└── README.md          # این فایل
+├── hill_cipher.py      # Hill Cipher implementation
+├── des_cipher.py       # DES Cipher implementation
+├── aes_cipher.py       # AES Cipher implementation
+├── test.py            # Comprehensive test file for all algorithms
+└── README.md          # This file
 ```
 
 ---
 
-## تست
+## Testing
 
-برای اجرای تست‌های جامع:
+To run comprehensive tests:
 
 ```bash
 python test.py
 ```
 
-این فایل تست شامل:
-- تست‌های جامع برای هر سه الگوریتم
-- تست با کاراکترهای مختلف
-- تست موارد خاص (edge cases)
-- گزارش کامل نتایج
+This test file includes:
+- Comprehensive tests for all three algorithms
+- Tests with various characters
+- Edge case testing
+- Complete results report
 
-### اجرای تست‌های جداگانه
+### Running Individual Tests
 
-```python
-# تست Hill Cipher
+```bash
+# Test Hill Cipher
 python hill_cipher.py
 
-# تست DES Cipher
+# Test DES Cipher
 python des_cipher.py
 
-# تست AES Cipher
+# Test AES Cipher
 python aes_cipher.py
 ```
 
 ---
 
-## مثال‌ها
+## Examples
 
-### مثال 1: رمزنگاری ساده با Hill Cipher
+### Example 1: Simple Encryption with Hill Cipher
 
 ```python
 from hill_cipher import encrypt_hill, decrypt_hill
@@ -187,7 +189,7 @@ decrypted = decrypt_hill(ciphertext, key)
 print(f"Decrypted: {decrypted}")
 ```
 
-### مثال 2: رمزنگاری با DES
+### Example 2: Encryption with DES
 
 ```python
 from des_cipher import encrypt_des, decrypt_des
@@ -203,7 +205,7 @@ print(f"Encrypted: {encrypted}")
 print(f"Decrypted: {decrypted}")
 ```
 
-### مثال 3: رمزنگاری با AES
+### Example 3: Encryption with AES
 
 ```python
 from aes_cipher import encrypt_aes, decrypt_aes
@@ -221,66 +223,66 @@ print(f"Decrypted: {decrypted}")
 
 ---
 
-## ویژگی‌های پیاده‌سازی
+## Implementation Features
 
 ### Hill Cipher
-- ✅ پشتیبانی از ماتریس‌های کلید 2x2 و 3x3
-- ✅ محاسبه معکوس ماتریس در مدول 26
-- ✅ مدیریت خودکار padding
-- ✅ حذف خودکار padding در رمزگشایی
+- ✅ Support for 2x2 and 3x3 key matrices
+- ✅ Matrix inverse calculation modulo 26
+- ✅ Automatic padding management
+- ✅ Automatic padding removal during decryption
 
 ### DES
-- ✅ پیاده‌سازی کامل 16 دور DES
-- ✅ تولید کلیدهای دور
-- ✅ استفاده از جداول جایگشت استاندارد
-- ✅ استفاده از 8 S-Box
-- ✅ مدیریت padding (PKCS7)
+- ✅ Complete 16-round DES implementation
+- ✅ Round key generation
+- ✅ Standard permutation tables
+- ✅ 8 S-Boxes implementation
+- ✅ PKCS7 padding management
 
 ### AES
-- ✅ پیاده‌سازی AES-128 (10 دور)
-- ✅ توسعه کلید (Key Expansion)
-- ✅ تبدیل‌های SubBytes، ShiftRows، MixColumns
-- ✅ عملیات در میدان GF(2^8)
-- ✅ مدیریت padding (PKCS7)
+- ✅ AES-128 implementation (10 rounds)
+- ✅ Key expansion
+- ✅ SubBytes, ShiftRows, MixColumns transformations
+- ✅ Operations in GF(2^8) field
+- ✅ PKCS7 padding management
 
 ---
 
-## محدودیت‌ها
+## Limitations
 
-- **Hill Cipher**: فقط حروف انگلیسی (A-Z) را پشتیبانی می‌کند
-- **DES**: کلید باید حداقل 8 کاراکتر باشد (64 بیت)
-- **AES**: کلید باید حداقل 16 کاراکتر باشد (128 بیت)
-- این پیاده‌سازی‌ها برای اهداف آموزشی هستند و نباید برای رمزنگاری داده‌های حساس در محیط تولید استفاده شوند
-
----
-
-## مشارکت
-
-مشارکت‌ها، پیشنهادات و گزارش باگ‌ها خوش‌آمد هستند! لطفاً:
-
-1. این مخزن را Fork کنید
-2. یک شاخه برای ویژگی جدید ایجاد کنید (`git checkout -b feature/AmazingFeature`)
-3. تغییرات خود را Commit کنید (`git commit -m 'Add some AmazingFeature'`)
-4. به شاخه خود Push کنید (`git push origin feature/AmazingFeature`)
-5. یک Pull Request باز کنید
+- **Hill Cipher**: Only supports English letters (A-Z)
+- **DES**: Key must be at least 8 characters (64 bits)
+- **AES**: Key must be at least 16 characters (128 bits)
+- These implementations are for educational purposes and should not be used for encrypting sensitive data in production environments
 
 ---
 
-## مجوز
+## Contributing
 
-این پروژه برای اهداف آموزشی ایجاد شده است. استفاده از آن آزاد است.
+Contributions, suggestions, and bug reports are welcome! Please:
 
----
-
-## اطلاعات پروژه
-
-- **درس**: جبرخطی عددی (Numerical Linear Algebra)
-- **دانشگاه**: دانشگاه صنعتی امیرکبیر (Amirkabir University of Technology)
-- **زبان برنامه‌نویسی**: Python 3
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
-## منابع
+## License
+
+This project is created for educational purposes. Free to use.
+
+---
+
+## Project Information
+
+- **Course**: Numerical Linear Algebra
+- **University**: Amirkabir University of Technology
+- **Programming Language**: Python 3
+
+---
+
+## References
 
 - [Hill Cipher - Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)
 - [DES - Wikipedia](https://en.wikipedia.org/wiki/Data_Encryption_Standard)
@@ -289,11 +291,10 @@ print(f"Decrypted: {decrypted}")
 
 ---
 
-## تماس
+## Contact
 
-برای سوالات و پیشنهادات، لطفاً یک Issue در GitHub ایجاد کنید.
+For questions and suggestions, please open an Issue on GitHub.
 
 ---
 
-**نکته**: این پیاده‌سازی‌ها برای اهداف آموزشی و یادگیری مفاهیم رمزنگاری و جبرخطی طراحی شده‌اند. برای استفاده در محیط تولید، از کتابخانه‌های رمزنگاری استاندارد و تست شده استفاده کنید.
-
+**Note**: These implementations are designed for educational purposes and learning cryptography and linear algebra concepts. For production use, please use standard and tested cryptography libraries.
